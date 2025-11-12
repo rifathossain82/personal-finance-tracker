@@ -53,10 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Stack(
           children: [
             _buildForm(),
-            Positioned(
-              left: 20,
-              child: CustomBackButton(),
-            ),
+            Positioned(left: 20, child: CustomBackButton()),
           ],
         ),
       ),
@@ -81,20 +78,20 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   KLogo(),
                   const SizedBox(height: 6),
-                  Text('আপনার অ্যাকাউন্ট তৈরি করুন'),
+                  Text('Create your account'),
                   const SizedBox(height: 20),
                   KTextFormFieldBuilderWithTitle(
                     controller: nameTextController,
                     validator: Validators.emptyValidator,
-                    hintText: 'আপনার নাম লিখুন',
-                    title: 'নাম',
+                    hintText: 'Enter your name',
+                    title: 'Name',
                     prefixIconData: Icons.person_outline_rounded,
                     inputType: TextInputType.name,
                     inputAction: TextInputAction.next,
                   ),
                   KTextFormFieldBuilderWithTitle(
-                    title: 'ফোন নম্বর',
-                    hintText: 'আপনার ফোন নম্বর লিখুন',
+                    title: 'Phone Number',
+                    hintText: 'Enter your phone number',
                     validator: Validators.phoneNumberValidator,
                     controller: phoneTextController,
                     prefixIconData: Icons.call,
@@ -104,8 +101,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: emailTextController,
                     validator: Validators.emailValidator,
-                    hintText: 'আপনার ই-মেইল লিখুন',
-                    title: 'ই-মেইল',
+                    hintText: 'Enter your email',
+                    title: 'Email',
                     prefixIconData: Icons.mail_outline_rounded,
                     suffixIconData: authController.isRegisterEmailValid.value
                         ? Icons.check
@@ -117,13 +114,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: passwordTextController,
                     validator: Validators.passwordValidator,
-                    hintText: 'আপনার পাসওয়ার্ড লিখুন',
-                    title: 'পাসওয়ার্ড',
+                    hintText: 'Enter your password',
+                    title: 'Password',
                     prefixIconData: Icons.lock_outline_rounded,
                     suffixIconData:
                         authController.isRegisterPasswordVisibility.isTrue
-                            ? Icons.visibility_off
-                            : Icons.visibility_rounded,
+                        ? Icons.visibility_off
+                        : Icons.visibility_rounded,
                     onTapSuffix:
                         authController.toggleRegisterPasswordVisibility,
                     inputType: TextInputType.visiblePassword,
@@ -138,11 +135,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       value,
                       passwordTextController.text.trim(),
                     ),
-                    hintText: 'পাসওয়ার্ডটি আবার লিখুন',
-                    title: 'পাসওয়ার্ড নিশ্চিত করুন',
+                    hintText: 'Re-enter your password',
+                    title: 'Confirm Password',
                     prefixIconData: Icons.lock_outline_rounded,
-                    suffixIconData: authController
-                            .isRegisterConfirmPasswordVisibility.isTrue
+                    suffixIconData:
+                        authController
+                            .isRegisterConfirmPasswordVisibility
+                            .isTrue
                         ? Icons.visibility_off
                         : Icons.visibility_rounded,
                     onTapSuffix:
@@ -150,7 +149,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     inputType: TextInputType.visiblePassword,
                     inputAction: TextInputAction.done,
                     obscureText: authController
-                        .isRegisterConfirmPasswordVisibility.value,
+                        .isRegisterConfirmPasswordVisibility
+                        .value,
                     bottomPadding: 8,
                   ),
                   const SizedBox(height: 16),
@@ -160,10 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     onPressed: onPressedSignUp,
                     child: authController.isRegisterLoading.isTrue
                         ? const KButtonProgressIndicator()
-                        : Text(
-                            'তৈরি করুন',
-                            style: context.buttonTextStyle(),
-                          ),
+                        : Text('Sign Up', style: context.buttonTextStyle()),
                   ),
                   const SizedBox(height: 24),
                   LoginRedirectButton(),
@@ -183,7 +180,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (authController.isPrivacyPolicyChecked.isFalse) {
       SnackBarService.showSnackBar(
-        message: 'পরিষেবার শর্তাবলী ও গোপনীয়তা নীতিতে সম্মত থাকলে টিক দিন',
+        message:
+            'Please check the box to agree to the Terms of Service and Privacy Policy',
         bgColor: failedColor,
       );
       return;

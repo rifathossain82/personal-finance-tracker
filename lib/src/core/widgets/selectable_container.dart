@@ -15,7 +15,7 @@ class SelectableContainer extends StatelessWidget {
   final Color? unSelectedBorderColor;
 
   const SelectableContainer({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.isSelected,
     required this.child,
@@ -27,7 +27,7 @@ class SelectableContainer extends StatelessWidget {
     this.unSelectedBgColor,
     this.selectedBorderColor,
     this.unSelectedBorderColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

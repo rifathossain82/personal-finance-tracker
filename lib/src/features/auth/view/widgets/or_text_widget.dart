@@ -23,7 +23,7 @@ class OrTextWidget extends StatelessWidget {
               horizontal: 15,
             ),
             child: Text(
-              'অথবা',
+              'OR',
               style: context.titleSmall(
                 color: kGreyTextColor,
               ),

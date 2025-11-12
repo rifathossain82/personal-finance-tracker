@@ -86,17 +86,11 @@ class AuthController extends GetxController {
     return storedUserId != null && !_repository.hasVerifiedEmail();
   }
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> login({required String email, required String password}) async {
     try {
       isLoginLoading(true);
 
-      Result result = await _repository.login(
-        email: email,
-        password: password,
-      );
+      Result result = await _repository.login(email: email, password: password);
 
       if (result.isSuccess) {
         await _handleLogin();
@@ -114,10 +108,7 @@ class AuthController extends GetxController {
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isLoginLoading(false);
     }
@@ -169,10 +160,7 @@ class AuthController extends GetxController {
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isRegisterLoading(false);
     }
@@ -198,10 +186,7 @@ class AuthController extends GetxController {
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isResendVerifyEmailLoading(false);
     }
@@ -211,22 +196,21 @@ class AuthController extends GetxController {
     try {
       isForgotPasswordLoading(true);
 
-      final result = await _repository.sendPasswordResetEmail(
-        email: email,
-      );
+      final result = await _repository.sendPasswordResetEmail(email: email);
 
       if (result.isSuccess) {
         Get.offAllNamed(RouteGenerator.login);
         SnackBarService.showSnackBar(
           durationInSeconds: 10,
-          message: 'পাসওয়ার্ড রিসেট ইমেইল পাঠানো হয়েছে। আপনার ইমেইল চেক করুন।',
+          message:
+              'Password reset email has been sent. Please check your email.',
           bgColor: successColor,
         );
       }
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
       SnackBarService.showSnackBar(
-        message: 'ইমেইল পাঠাতে সমস্যা হয়েছে!',
+        message: 'There was a problem sending the email!',
         bgColor: failedColor,
       );
     } finally {
@@ -250,7 +234,7 @@ class AuthController extends GetxController {
         Get.offAllNamed(RouteGenerator.login);
         SnackBarService.showSnackBar(
           durationInSeconds: 3,
-          message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে। অনুগ্রহ করে আবার লগইন করুন।',
+          message: 'Password changed successfully. Please login again',
           bgColor: successColor,
         );
       }
@@ -258,7 +242,7 @@ class AuthController extends GetxController {
       Log.error('$e', stackTrace: stackTrace);
 
       SnackBarService.showSnackBar(
-        message: 'পাসওয়ার্ড পরিবর্তনে সমস্যা হয়েছে!',
+        message: 'There was a problem changing the password!',
         bgColor: failedColor,
       );
     } finally {
@@ -273,7 +257,7 @@ class AuthController extends GetxController {
       Result result = await _repository.logout();
 
       if (result.isSuccess) {
-        Get.offAllNamed(RouteGenerator.dashboard);
+        Get.offAllNamed(RouteGenerator.login);
         LocalStorage.removeAllData();
         SnackBarService.showSnackBar(
           message: Message.logoutSuccess,
@@ -283,10 +267,7 @@ class AuthController extends GetxController {
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isLogoutLoading(false);
     }

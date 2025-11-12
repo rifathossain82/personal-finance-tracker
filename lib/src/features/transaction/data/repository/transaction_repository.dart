@@ -62,23 +62,22 @@ class TransactionRepository {
   }
 
   /// Get all transactions for a specific user
-  Stream<List<TransactionModel>> getTransactions({
+  Future<List<TransactionModel>> getTransactions({
     required String userId,
-  }) {
+  }) async {
     try {
-      return _firestore
+      final snapshot = await _firestore
           .collection(_collectionName)
           .where('userId', isEqualTo: userId)
           .orderBy('date', descending: true)
-          .snapshots()
-          .map((snapshot) {
-        return snapshot.docs
-            .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
-            .toList();
-      });
+          .get();
+
+      return snapshot.docs
+          .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
+          .toList();
     } catch (e) {
       Log.error("Error getting transactions: ${e.toString()}");
-      return Stream.value([]);
+      rethrow;
     }
   }
 
@@ -110,52 +109,50 @@ class TransactionRepository {
   }
 
   /// Get transactions by type (cashIn or cashOut)
-  Stream<List<TransactionModel>> getTransactionsByType({
+  Future<List<TransactionModel>> getTransactionsByType({
     required String userId,
     required TransactionType type,
-  }) {
+  }) async {
     try {
       String typeString = type == TransactionType.cashIn ? 'cashIn' : 'cashOut';
 
-      return _firestore
+      final snapshot = await _firestore
           .collection(_collectionName)
           .where('userId', isEqualTo: userId)
           .where('type', isEqualTo: typeString)
           .orderBy('date', descending: true)
-          .snapshots()
-          .map((snapshot) {
-        return snapshot.docs
-            .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
-            .toList();
-      });
+          .get();
+
+      return snapshot.docs
+          .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
+          .toList();
     } catch (e) {
       Log.error("Error getting transactions by type: ${e.toString()}");
-      return Stream.value([]);
+      rethrow;
     }
   }
 
   /// Get transactions within a date range
-  Stream<List<TransactionModel>> getTransactionsByDateRange({
+  Future<List<TransactionModel>> getTransactionsByDateRange({
     required String userId,
     required DateTime startDate,
     required DateTime endDate,
-  }) {
+  }) async {
     try {
-      return _firestore
+      final snapshot = await _firestore
           .collection(_collectionName)
           .where('userId', isEqualTo: userId)
           .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
           .where('date', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
           .orderBy('date', descending: true)
-          .snapshots()
-          .map((snapshot) {
-        return snapshot.docs
-            .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
-            .toList();
-      });
+          .get();
+
+      return snapshot.docs
+          .map((doc) => TransactionModel.fromJson(doc.data(), doc.id))
+          .toList();
     } catch (e) {
       Log.error("Error getting transactions by date range: ${e.toString()}");
-      return Stream.value([]);
+      rethrow;
     }
   }
 }

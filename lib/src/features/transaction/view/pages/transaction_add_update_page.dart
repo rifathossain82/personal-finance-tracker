@@ -68,6 +68,8 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
   void initState() {
     super.initState();
 
+    selectedPaymentMethod = PaymentMethod.cash;
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (widget.arguments.existingTransaction != null) {
         existingTransaction = widget.arguments.existingTransaction;
@@ -75,7 +77,7 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
         selectedDateTime = existingTransaction?.date;
         amountTextController.text = "${existingTransaction?.amount ?? 0}";
         selectedPaymentMethod = getSelectedPaymentMethod(existingTransaction);
-        remarkTextController.text = existingTransaction?.description ?? '';
+        remarkTextController.text = existingTransaction?.remark ?? '';
         selectedCategory = existingTransaction?.category;
       }
 
@@ -117,12 +119,14 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: GradientAppBar(title: Text(title)),
       body: _transactionFormWidget(),
-      bottomNavigationBar: _BottomNavigationBar(
-        transactionType: widget.arguments.transactionType,
-        onSave: _onSave,
-        transactionController: transactionController,
+      bottomNavigationBar: SafeArea(
+        child: _BottomNavigationBar(
+          transactionType: widget.arguments.transactionType,
+          onSave: _onSave,
+          transactionController: transactionController,
+        ),
       ),
     );
   }
@@ -167,13 +171,6 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
                 isFilteredOnline: false,
               ),
               KTextFormFieldBuilderWithTitle(
-                controller: remarkTextController,
-                title: 'Description',
-                hintText: "Enter any additional comments or notes",
-                inputAction: TextInputAction.next,
-                inputType: TextInputType.text,
-              ),
-              KTextFormFieldBuilderWithTitle(
                 controller: amountTextController,
                 title: 'Amount',
                 hintText: '0',
@@ -181,11 +178,18 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
                 inputType: TextInputType.number,
                 validator: Validators.emptyValidator,
               ),
+              KTextFormFieldBuilderWithTitle(
+                controller: remarkTextController,
+                title: 'Remark',
+                hintText: "Enter any additional comments or notes",
+                inputAction: TextInputAction.next,
+                inputType: TextInputType.text,
+              ),
               KPaymentMethodFieldBuilderWithTitle(
                 title: 'Payment Method',
                 items: PaymentMethod.values,
                 selectedItem: selectedPaymentMethod,
-                itemBuilder: (item) => item?.name ?? '',
+                itemBuilder: (item) => item?.name.capitalizedFirst ?? '',
                 onItemChanged: (item) {
                   setState(() {
                     selectedPaymentMethod = item;
@@ -222,14 +226,27 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
     }
   }
 
+  String get _userId{
+    final String? userId = LocalStorage.getData(
+      key: LocalStorageKey.userId,
+    );
+
+    if (userId == null) {
+      throw 'User ID not found';
+    }
+
+    return userId;
+  }
+
   void addNewTransaction() {
     final newTransaction = TransactionModel(
-      date: selectedDateTime,
-      amount: num.tryParse(amountTextController.text) ?? 0,
-      paymentMethod: selectedPaymentMethod,
-      description: remarkTextController.text.trim(),
+      userId: _userId,
       type: widget.arguments.transactionType,
+      paymentMethod: selectedPaymentMethod,
+      amount: num.tryParse(amountTextController.text) ?? 0,
       category: selectedCategory,
+      remark: remarkTextController.text.trim(),
+      date: selectedDateTime,
       createdAt: DateTime.now(),
     );
 
@@ -241,12 +258,13 @@ class _TransactionAddUpdatePageState extends State<TransactionAddUpdatePage> {
   void updateTransaction() {
     final newTransaction = TransactionModel(
       id: existingTransaction?.id,
-      date: selectedDateTime,
-      amount: num.tryParse(amountTextController.text) ?? 0,
-      paymentMethod: selectedPaymentMethod,
-      description: remarkTextController.text.trim(),
+      userId: _userId,
       type: existingTransaction?.type,
+      paymentMethod: selectedPaymentMethod,
+      amount: num.tryParse(amountTextController.text) ?? 0,
       category: selectedCategory,
+      remark: remarkTextController.text.trim(),
+      date: selectedDateTime,
     );
 
     transactionController

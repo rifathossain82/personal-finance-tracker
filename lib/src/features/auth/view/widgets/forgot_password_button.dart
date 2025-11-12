@@ -13,7 +13,7 @@ class ForgotPasswordButton extends StatelessWidget {
         onTap: () => Get.toNamed(RouteGenerator.forgotPassword),
         behavior: HitTestBehavior.opaque,
         child: Text(
-          'পাসওয়ার্ড ভুলে গেছেন?',
+          'Forgot password?',
           style: context.bodyLarge(
             fontWeight: FontWeight.w500,
             color: kPrimaryColor,

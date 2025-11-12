@@ -23,18 +23,10 @@ class TransactionController extends GetxController {
   /// Selected transaction for editing
   Rx<TransactionModel?> selectedTransaction = Rx<TransactionModel?>(null);
 
-  @override
-  void onInit() {
-    super.onInit();
-    loadTransactions();
-  }
-
   /// Load all transactions for current user
-  void loadTransactions() {
+  Future<void> loadTransactions() async {
     try {
-      final String? userId = LocalStorage.getData(
-        key: LocalStorageKey.userId,
-      );
+      final String? userId = LocalStorage.getData(key: LocalStorageKey.userId);
 
       if (userId == null) {
         Log.error('User ID not found in local storage');
@@ -43,19 +35,14 @@ class TransactionController extends GetxController {
 
       isTransactionsLoading(true);
 
-      _repository.getTransactions(userId: userId).listen(
-            (transactionList) {
-          transactions.value = transactionList;
-          _calculateSummary();
-          isTransactionsLoading(false);
-        },
-        onError: (error) {
-          Log.error('Error loading transactions: $error');
-          isTransactionsLoading(false);
-        },
-      );
+      final transactions = await _repository.getTransactions(userId: userId);
+      this.transactions.value = transactions;
+      _calculateSummary();
+
+      Log.debug("Transactions: ${transactions.length}");
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
+    } finally {
       isTransactionsLoading(false);
     }
   }
@@ -79,19 +66,9 @@ class TransactionController extends GetxController {
   }
 
   /// Add a new transaction
-  Future<void> addTransaction({
-    required TransactionModel transaction,
-  }) async {
+  Future<void> addTransaction({required TransactionModel transaction}) async {
     try {
       isAddTransactionLoading(true);
-
-      final String? userId = LocalStorage.getData(
-        key: LocalStorageKey.userId,
-      );
-
-      if (userId == null) {
-        throw 'User ID not found';
-      }
 
       Result result = await _repository.addTransaction(
         transaction: transaction,
@@ -99,25 +76,23 @@ class TransactionController extends GetxController {
 
       if (result.isSuccess) {
         Get.back();
+        loadTransactions();
         SnackBarService.showSnackBar(
           message: transaction.type == TransactionType.cashIn
-              ? 'ক্যাশ ইন সফলভাবে যোগ করা হয়েছে'
-              : 'ক্যাশ আউট সফলভাবে যোগ করা হয়েছে',
+              ? 'Cash In added successfully'
+              : 'Cash Out added successfully',
           bgColor: successColor,
         );
       } else {
         SnackBarService.showSnackBar(
-          message: result.message ?? 'লেনদেন যোগ করতে ব্যর্থ',
+          message: result.message ?? 'Failed to add transaction',
           bgColor: failedColor,
         );
       }
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isAddTransactionLoading(false);
     }
@@ -130,9 +105,7 @@ class TransactionController extends GetxController {
     try {
       isUpdateTransactionLoading(true);
 
-      final String? userId = LocalStorage.getData(
-        key: LocalStorageKey.userId,
-      );
+      final String? userId = LocalStorage.getData(key: LocalStorageKey.userId);
 
       if (userId == null) {
         throw 'User ID not found';
@@ -145,24 +118,22 @@ class TransactionController extends GetxController {
 
       if (result.isSuccess) {
         Get.back();
+        loadTransactions();
         SnackBarService.showSnackBar(
-          message: 'লেনদেন সফলভাবে আপডেট করা হয়েছে',
+          message: 'Transaction updated successfully',
           bgColor: successColor,
         );
         selectedTransaction.value = null;
       } else {
         SnackBarService.showSnackBar(
-          message: result.message ?? 'লেনদেন আপডেট করতে ব্যর্থ',
+          message: result.message ?? 'Failed to update transaction',
           bgColor: failedColor,
         );
       }
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isUpdateTransactionLoading(false);
     }
@@ -179,23 +150,21 @@ class TransactionController extends GetxController {
 
       if (result.isSuccess) {
         Get.back();
+        loadTransactions();
         SnackBarService.showSnackBar(
-          message: 'লেনদেন সফলভাবে মুছে ফেলা হয়েছে',
+          message: 'Transaction deleted successfully',
           bgColor: successColor,
         );
       } else {
         SnackBarService.showSnackBar(
-          message: result.message ?? 'লেনদেন মুছতে ব্যর্থ',
+          message: result.message ?? 'Failed to delete transaction',
           bgColor: failedColor,
         );
       }
     } catch (e, stackTrace) {
       Log.error('$e', stackTrace: stackTrace);
 
-      SnackBarService.showSnackBar(
-        message: e.toString(),
-        bgColor: failedColor,
-      );
+      SnackBarService.showSnackBar(message: e.toString(), bgColor: failedColor);
     } finally {
       isDeleteTransactionLoading(false);
     }

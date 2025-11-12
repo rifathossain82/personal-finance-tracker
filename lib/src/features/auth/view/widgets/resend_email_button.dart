@@ -17,7 +17,7 @@ class ResendEmailButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "ভেরিফিকেশন মেইল পাননি?",
+          "Didn't receive the verification email?",
           style: context.bodyLarge(
             color: kGrey,
           ),
@@ -30,7 +30,7 @@ class ResendEmailButton extends StatelessWidget {
             child: authController.isResendVerifyEmailLoading.isTrue
                 ? CircularProgressIndicator()
                 : Text(
-                    "পুনরায় প্রেরণ করুন",
+                    "Resend",
                     style: context.bodyLarge(color: kPrimaryColor),
                   ),
           );

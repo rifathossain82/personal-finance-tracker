@@ -11,7 +11,7 @@ class RegisterRedirectButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "কোন অ্যাকাউন্ট নেই?",
+          "Don't have an account?",
           style: context.bodyLarge(
             color: kGrey,
           ),
@@ -21,7 +21,7 @@ class RegisterRedirectButton extends StatelessWidget {
           onTap: () => Get.toNamed(RouteGenerator.register),
           behavior: HitTestBehavior.opaque,
           child: Text(
-            "তৈরি করুন",
+            "Create Account",
             style: context.bodyLarge(
               color: kPrimaryColor
             ),

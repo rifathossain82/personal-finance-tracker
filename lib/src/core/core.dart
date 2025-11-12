@@ -60,4 +60,5 @@ export 'package:personal_finance_tracker/src/core/widgets/title_text_widget.dart
 export 'package:personal_finance_tracker/src/core/widgets/k_payment_method_field_builder_with_title.dart';
 export 'package:personal_finance_tracker/src/core/widgets/k_icon_button.dart';
 export 'package:personal_finance_tracker/src/core/widgets/selectable_container.dart';
+export 'package:personal_finance_tracker/src/core/widgets/popup_menu_builder.dart';
 export 'package:personal_finance_tracker/src/core/shared/models/result.dart';
