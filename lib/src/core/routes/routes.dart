@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:personal_finance_tracker/src/core/routes/auth_middleware.dart';
 import 'package:personal_finance_tracker/src/features/auth/view/pages/forgot_password_page.dart';
 import 'package:personal_finance_tracker/src/features/auth/view/pages/login_page.dart';
 import 'package:personal_finance_tracker/src/features/auth/view/pages/register_page.dart';
@@ -48,6 +49,7 @@ class RouteGenerator {
     GetPage(
       name: RouteGenerator.transactions,
       page: () => const TransactionsPage(),
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: RouteGenerator.transactionAddUpdate,
