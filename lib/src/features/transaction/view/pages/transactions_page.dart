@@ -13,7 +13,7 @@ class TransactionsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kSecondaryBackgroundColor,
       appBar: GradientAppBar(title: const Text(AppConstants.appName)),
-      body: SafeArea(child: const TransactionBody()),
+      body: const TransactionBody(),
       bottomNavigationBar: _BottomNavigationBar(
         onCashIn: _onCashIn,
         onCashOut: _onCashOut,

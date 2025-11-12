@@ -1,5 +1,4 @@
 import 'package:personal_finance_tracker/src/core/utils/color.dart';
-import 'package:personal_finance_tracker/src/core/widgets/bottom_loader.dart';
 import 'package:personal_finance_tracker/src/core/widgets/failure_widget_builder.dart';
 import 'package:personal_finance_tracker/src/core/widgets/k_custom_loader.dart';
 import 'package:flutter/material.dart';
@@ -62,22 +61,24 @@ class _TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(15),
-      controller: scrollController,
-      itemCount: transactionController.transactions.length,
-      itemBuilder: (context, index) {
-        // if (index == transactionController.transactionList.length) {
-        //   return transactionController.loadedCompleted.value
-        //       ? Container()
-        //       : const BottomLoader();
-        // }
-        return TransactionItemWidget(
-          transaction: transactionController.transactions[index],
-        );
-      },
-      separatorBuilder: (context, index) => const SizedBox(height: 8),
+    return StretchingOverscrollIndicator(
+      axisDirection: AxisDirection.down,
+      child: ListView.separated(
+        padding: const EdgeInsets.all(15),
+        controller: scrollController,
+        itemCount: transactionController.transactions.length,
+        itemBuilder: (context, index) {
+          // if (index == transactionController.transactionList.length) {
+          //   return transactionController.loadedCompleted.value
+          //       ? Container()
+          //       : const BottomLoader();
+          // }
+          return TransactionItemWidget(
+            transaction: transactionController.transactions[index],
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(height: 8),
+      ),
     );
   }
 }

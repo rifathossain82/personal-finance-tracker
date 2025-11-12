@@ -8,7 +8,7 @@ class TransactionModel {
   final PaymentMethod? paymentMethod;
   final num? amount;
   final String? category;
-  final String? description;
+  final String? remark;
   final DateTime? date;
   final DateTime? createdAt;
 
@@ -19,7 +19,7 @@ class TransactionModel {
     this.paymentMethod,
     this.amount,
     this.category,
-    this.description,
+    this.remark,
     this.date,
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
@@ -32,7 +32,7 @@ class TransactionModel {
       'paymentMethod': paymentMethod != null ? paymentMethod!.name : '',
       'amount': amount,
       'category': category,
-      'description': description,
+      'remark': remark,
       'date': Timestamp.fromDate(date!),
       'createdAt': Timestamp.fromDate(createdAt!),
     };
@@ -47,7 +47,7 @@ class TransactionModel {
       paymentMethod: map['paymentMethod'] == 'cash' ? PaymentMethod.cash : PaymentMethod.bkash,
       amount: (map['amount'] ?? 0).toDouble(),
       category: map['category'] ?? '',
-      description: map['description'],
+      remark: map['remark'],
       date: (map['date'] as Timestamp).toDate(),
       createdAt: (map['createdAt'] as Timestamp).toDate(),
     );
@@ -61,7 +61,7 @@ class TransactionModel {
     PaymentMethod? paymentMethod,
     num? amount,
     String? category,
-    String? description,
+    String? remark,
     DateTime? date,
     DateTime? createdAt,
   }) {
@@ -72,7 +72,7 @@ class TransactionModel {
       paymentMethod: paymentMethod ?? this.paymentMethod,
       amount: amount ?? this.amount,
       category: category ?? this.category,
-      description: description ?? this.description,
+      remark: remark ?? this.remark,
       date: date ?? this.date,
       createdAt: createdAt ?? this.createdAt,
     );

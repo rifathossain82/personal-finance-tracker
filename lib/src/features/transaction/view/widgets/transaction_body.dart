@@ -1,4 +1,4 @@
-import 'package:personal_finance_tracker/src/core/widgets/title_text_widget.dart';
+import 'package:personal_finance_tracker/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:personal_finance_tracker/src/features/transaction/controller/transaction_controller.dart';
@@ -18,8 +18,8 @@ class _TransactionBodyState extends State<TransactionBody> {
 
   @override
   void initState() {
-    transactionController.loadTransactions();
     super.initState();
+    transactionController.loadTransactions();
   }
 
   @override
@@ -30,24 +30,19 @@ class _TransactionBodyState extends State<TransactionBody> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return CustomRefreshIndicator(
       onRefresh: () async {
-        transactionController.loadTransactions();
+        await transactionController.loadTransactions();
       },
-      child: Stack(
+      child: Column(
         children: [
-          ListView(),
-          Column(
-            children: [
-              const NetBalanceCardWidget(),
-              const TitleTextWidget(title: "Transaction List : "),
-              Expanded(
-                child: TransactionListWidget(
-                  transactionController: transactionController,
-                  scrollController: _scrollController,
-                ),
-              ),
-            ],
+          const NetBalanceCardWidget(),
+          const TitleTextWidget(title: "Transaction List : "),
+          Expanded(
+            child: TransactionListWidget(
+              transactionController: transactionController,
+              scrollController: _scrollController,
+            ),
           ),
         ],
       ),

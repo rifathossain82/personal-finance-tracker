@@ -13,7 +13,7 @@ class KPaymentMethodFieldBuilderWithTitle<T> extends StatelessWidget {
   final double bottomPadding;
 
   const KPaymentMethodFieldBuilderWithTitle({
-    Key? key,
+    super.key,
     required this.title,
     required this.items,
     required this.selectedItem,
@@ -21,7 +21,7 @@ class KPaymentMethodFieldBuilderWithTitle<T> extends StatelessWidget {
     required this.onItemChanged,
     this.hasValidator = true,
     this.bottomPadding = 15,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +66,7 @@ class KPaymentMethodFieldBuilderWithTitle<T> extends StatelessWidget {
                         right: 8,
                         bottom: 10,
                       ),
+
                       child: Text(
                         itemBuilder(item),
                         textAlign: TextAlign.center,
