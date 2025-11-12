@@ -1,0 +1,54 @@
+import 'package:personal_finance_tracker/src/core/utils/color.dart';
+import 'package:flutter/material.dart';
+
+class SelectableContainer extends StatelessWidget {
+  final VoidCallback onTap;
+  final bool isSelected;
+  final Widget child;
+  final EdgeInsetsGeometry? margin;
+  final double? height;
+  final double? width;
+  final double borderRadius;
+  final Color? selectedBgColor;
+  final Color? unSelectedBgColor;
+  final Color? selectedBorderColor;
+  final Color? unSelectedBorderColor;
+
+  const SelectableContainer({
+    Key? key,
+    required this.onTap,
+    required this.isSelected,
+    required this.child,
+    this.margin,
+    this.height,
+    this.width,
+    this.borderRadius = 8,
+    this.selectedBgColor,
+    this.unSelectedBgColor,
+    this.selectedBorderColor,
+    this.unSelectedBorderColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 8,
+        ),
+        margin: margin,
+        decoration: BoxDecoration(
+          color: isSelected
+              ? selectedBgColor ?? kPrimaryColor
+              : unSelectedBgColor ?? kGreyLight,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        height: height,
+        width: width,
+        child: child,
+      ),
+    );
+  }
+}

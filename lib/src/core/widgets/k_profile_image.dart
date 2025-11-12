@@ -31,7 +31,7 @@ class KProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final errorAssetImgPath = isMale ? AssetPath.person : AssetPath.women;
+    final errorAssetImgPath = AssetPath.person;
 
     return GestureDetector(
       onTap: onTap,
