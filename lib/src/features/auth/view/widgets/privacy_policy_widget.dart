@@ -18,11 +18,11 @@ class PrivacyPolicyWidget extends StatelessWidget {
             scale: 1.3,
             child: Checkbox(
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              visualDensity: VisualDensity(
+              visualDensity: const VisualDensity(
                 horizontal: VisualDensity.minimumDensity,
                 vertical: VisualDensity.minimumDensity,
               ),
-              side: BorderSide(
+              side: const BorderSide(
                 color: kGrey,
                 width: 1.5,
               ),
@@ -39,31 +39,31 @@ class PrivacyPolicyWidget extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: 'আমি ${AppConstants.appName} এর ',
+                    text: 'I agree to the ',
                     style: context.bodyLarge(
                       color: kGrey,
                     ),
                   ),
                   TextSpan(
-                    text: 'পরিষেবার শর্তাবলী ',
+                    text: 'Terms of Service ',
                     style: context.bodyLarge(
                       color: kPrimaryColor,
                     ),
                   ),
                   TextSpan(
-                    text: 'ও ',
+                    text: 'and ',
                     style: context.bodyLarge(
                       color: kGrey,
                     ),
                   ),
                   TextSpan(
-                    text: 'গোপনীয়তা নীতিতে',
+                    text: 'Privacy Policy ',
                     style: context.bodyLarge(
                       color: kPrimaryColor,
                     ),
                   ),
                   TextSpan(
-                    text: ' সম্মত আছি',
+                    text: 'of ${AppConstants.appName}',
                     style: context.bodyLarge(
                       color: kGrey,
                     ),

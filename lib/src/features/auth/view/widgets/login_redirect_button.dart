@@ -11,7 +11,7 @@ class LoginRedirectButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?",
+          "Already have an account?",
           style: context.bodyLarge(
             color: kGrey,
           ),
@@ -21,7 +21,7 @@ class LoginRedirectButton extends StatelessWidget {
           onTap: () => Get.back(),
           behavior: HitTestBehavior.opaque,
           child: Text(
-            "লগইন করুন",
+            "Login",
             style: context.bodyLarge(
               color: kPrimaryColor
             ),

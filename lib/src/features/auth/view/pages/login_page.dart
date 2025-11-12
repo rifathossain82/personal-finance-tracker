@@ -79,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: Text(
                       authController.canResendEmail()
-                          ? 'অনুগ্রহ করে আপনার ইমেইল চেক করুন এবং ভেরিফিকেশন সম্পন্ন করে লগইন করুন'
-                          : 'আপনার অ্যাকাউন্টে লগইন করুন',
+                          ? 'Please check your email and complete verification before logging in.'
+                          : 'Login to your account',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -88,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: emailTextController,
                     validator: Validators.emailValidator,
-                    hintText: 'আপনার ই-মেইল লিখুন',
-                    title: 'ই-মেইল',
+                    hintText: 'Email your email',
+                    title: 'Email',
                     prefixIconData: Icons.mail_outline_rounded,
                     suffixIconData: authController.isLoginEmailValid.value
                         ? Icons.check
@@ -101,8 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: passwordTextController,
                     validator: Validators.passwordValidator,
-                    hintText: 'আপনার পাসওয়ার্ড লিখুন',
-                    title: 'পাসওয়ার্ড',
+                    hintText: 'Enter your password',
+                    title: 'Password',
                     prefixIconData: Icons.lock_outline_rounded,
                     suffixIconData:
                         authController.isLoginPasswordVisibility.isTrue
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: authController.isLoginLoading.isTrue
                         ? const KButtonProgressIndicator()
                         : Text(
-                            'লগইন করুন',
+                            'Login',
                             style: context.buttonTextStyle(),
                           ),
                   ),

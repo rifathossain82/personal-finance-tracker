@@ -74,7 +74,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       horizontal: 20,
                     ),
                     child: const Text(
-                      'আপনার পাসওয়ার্ড পুনরুদ্ধার করুন',
+                      'Retrieve your password',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -82,8 +82,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: emailTextController,
                     validator: Validators.emailValidator,
-                    hintText: 'আপনার ই-মেইল লিখুন',
-                    title: 'ই-মেইল',
+                    hintText: 'Enter your email',
+                    title: 'Email',
                     prefixIconData: Icons.mail_outline_rounded,
                     suffixIconData:
                         authController.isForgotPasswordEmailValid.value
@@ -99,7 +99,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     child: authController.isForgotPasswordLoading.isTrue
                         ? const KButtonProgressIndicator()
                         : Text(
-                            'সাবমিট করুন',
+                            'Submit',
                             style: context.buttonTextStyle(),
                           ),
                   ),

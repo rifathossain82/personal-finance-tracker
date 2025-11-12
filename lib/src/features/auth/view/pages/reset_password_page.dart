@@ -42,9 +42,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: Text(
-          'পাসওয়ার্ড পরিবর্তন করুন',
-        ),
+        title: const Text('Change Password'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,8 +56,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: oldPasswordTextController,
                     validator: Validators.passwordValidator,
-                    hintText: 'পুরাতন পাসওয়ার্ড লিখুন',
-                    title: 'পুরাতন পাসওয়ার্ড',
+                    hintText: 'Enter old password',
+                    title: 'Old Password',
                     prefixIconData: Icons.lock_outline_rounded,
                     obscureText: oldPasswordVisibility,
                     suffixIconData: oldPasswordVisibility
@@ -77,8 +75,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   KTextFormFieldBuilderWithTitle(
                     controller: newPasswordTextController,
                     validator: Validators.passwordValidator,
-                    hintText: 'নতুন পাসওয়ার্ড লিখুন',
-                    title: 'নতুন পাসওয়ার্ড',
+                    hintText: 'Enter new password',
+                    title: 'New Password',
                     prefixIconData: Icons.lock_outline_rounded,
                     obscureText: newPasswordVisibility,
                     suffixIconData: newPasswordVisibility
@@ -99,8 +97,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       value,
                       newPasswordTextController.text.trim(),
                     ),
-                    hintText: 'নতুন পাসওয়ার্ডটি আবার লিখুন',
-                    title: 'নতুন পাসওয়ার্ড নিশ্চিত করুন',
+                    hintText: 'Re-enter new password',
+                    title: 'Confirm New Password',
                     prefixIconData: Icons.lock_outline_rounded,
                     obscureText: confirmPasswordVisibility,
                     suffixIconData: confirmPasswordVisibility
@@ -122,9 +120,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       child: authController.isChangePasswordLoading.isTrue
                           ? const KButtonProgressIndicator()
                           : Text(
-                              'পরিবর্তন করুন',
-                              style: context.buttonTextStyle(),
-                            ),
+                        'Change Password',
+                        style: context.buttonTextStyle(),
+                      ),
                     );
                   }),
                 ],
