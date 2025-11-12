@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "829042539761",
+    "project_id": "finance-tracker-nub",
+    "storage_bucket": "finance-tracker-nub.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829042539761:android:25e72420ad6459c0b9fd50",
+        "android_client_info": {
+          "package_name": "com.example.fin_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829042539761-tnqc84r1hphcpop33mbl3qv0n0rtnmv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-r24E2rEh2msphc3A1s7YrS2vy_DVrKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829042539761-tnqc84r1hphcpop33mbl3qv0n0rtnmv5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829042539761-sjmpgn3j5bpot1u0pb7tlrcgpp1cvsa4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.finTrack"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829042539761:android:394f6fe1adf18bdfb9fd50",
+        "android_client_info": {
+          "package_name": "com.personal_finance.tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829042539761-tnqc84r1hphcpop33mbl3qv0n0rtnmv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-r24E2rEh2msphc3A1s7YrS2vy_DVrKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829042539761-tnqc84r1hphcpop33mbl3qv0n0rtnmv5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829042539761-sjmpgn3j5bpot1u0pb7tlrcgpp1cvsa4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.finTrack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

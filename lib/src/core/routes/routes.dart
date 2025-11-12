@@ -11,6 +11,10 @@ class RouteGenerator {
 
   static final routes = [
     GetPage(
+      name: RouteGenerator.dashboard,
+      page: () => Scaffold(appBar: AppBar(),),
+    ),
+    GetPage(
       name: RouteGenerator.login,
       page: () => Scaffold(appBar: AppBar(),),
     ),
