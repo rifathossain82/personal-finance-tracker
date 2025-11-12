@@ -12,18 +12,12 @@ class TransactionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondaryBackgroundColor,
-      appBar: _homepageAppBar(context),
+      appBar: GradientAppBar(title: const Text(AppConstants.appName)),
       body: SafeArea(child: const TransactionBody()),
       bottomNavigationBar: _BottomNavigationBar(
         onCashIn: _onCashIn,
         onCashOut: _onCashOut,
       ),
-    );
-  }
-
-  AppBar _homepageAppBar(BuildContext context) {
-    return AppBar(
-      title: const Text(AppConstants.appName),
     );
   }
 
@@ -50,21 +44,13 @@ class _BottomNavigationBar extends StatelessWidget {
   final VoidCallback onCashIn;
   final VoidCallback onCashOut;
 
-  const _BottomNavigationBar({
-    required this.onCashIn,
-    required this.onCashOut,
-  });
+  const _BottomNavigationBar({required this.onCashIn, required this.onCashOut});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: kWhite,
-        boxShadow: [
-          KBoxShadow.top(),
-        ],
-      ),
+      decoration: BoxDecoration(color: kWhite, boxShadow: [KBoxShadow.top()]),
       child: Row(
         children: [
           Expanded(
