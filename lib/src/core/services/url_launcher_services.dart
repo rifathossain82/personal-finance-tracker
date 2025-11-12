@@ -1,0 +1,91 @@
+import 'package:personal_finance_tracker/src/core/helpers/logger.dart';
+import 'package:personal_finance_tracker/src/core/services/snack_bar_services.dart';
+import 'package:personal_finance_tracker/src/core/utils/color.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class UrlLauncherServices {
+  static Future<void> openGoogleMapsWithSearch(String query) async {
+    final encodedQuery = Uri.encodeComponent(query);
+    final googleMapsUri = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=$encodedQuery',
+    );
+
+    _launchUri(googleMapsUri);
+  }
+
+  static void sendWhatsappMessage({
+    required String phoneNumber,
+    required String message,
+  }) async {
+    Uri uri = Uri.parse(
+      "whatsapp://send?phone=+88$phoneNumber&text=${Uri.encodeFull(message)}",
+    );
+
+    _launchUri(uri);
+  }
+
+  static void makeCall({required String phoneNumber}) async {
+    final String url = 'tel:$phoneNumber';
+    Uri uri = Uri.parse(url);
+
+    _launchUri(uri);
+  }
+
+  static void sendSMS({required String phoneNumber}) async {
+    final String url = 'sms:$phoneNumber';
+    Uri uri = Uri.parse(url);
+
+    _launchUri(uri);
+  }
+
+  static void sendEmail({
+    required String email,
+    required String message,
+  }) async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: email,
+      query: 'subject=%20&body=${Uri.encodeFull(message)}%20',
+    );
+
+    _launchUri(params);
+  }
+
+  static void openURL({
+    required String url,
+    LaunchMode launchMode = LaunchMode.platformDefault,
+  }) async {
+    try {
+      Uri uri = Uri.parse(url);
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(
+          uri,
+          mode: launchMode,
+        );
+      }
+    } catch (e, stackTrace) {
+      Log.error('$e', stackTrace: stackTrace);
+
+      SnackBarService.showSnackBar(
+        message: '$e',
+        bgColor: failedColor,
+      );
+    }
+  }
+
+  static void _launchUri(Uri uri) async {
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      }
+    } catch (e, stackTrace) {
+      Log.error('$e', stackTrace: stackTrace);
+
+      SnackBarService.showSnackBar(
+        message: '$e',
+        bgColor: failedColor,
+      );
+    }
+  }
+}
