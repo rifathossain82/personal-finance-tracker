@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:personal_finance_tracker/src/features/auth/view/pages/forgot_password_page.dart';
+import 'package:personal_finance_tracker/src/features/auth/view/pages/login_page.dart';
+import 'package:personal_finance_tracker/src/features/auth/view/pages/register_page.dart';
+import 'package:personal_finance_tracker/src/features/auth/view/pages/reset_password_page.dart';
 
 class RouteGenerator {
   static const String dashboard = '/';
@@ -16,7 +20,19 @@ class RouteGenerator {
     ),
     GetPage(
       name: RouteGenerator.login,
-      page: () => Scaffold(appBar: AppBar(),),
+      page: () => const LoginPage(),
+    ),
+    GetPage(
+      name: RouteGenerator.register,
+      page: () => const RegisterPage(),
+    ),
+    GetPage(
+      name: RouteGenerator.forgotPassword,
+      page: () => const ForgotPasswordPage(),
+    ),
+    GetPage(
+      name: RouteGenerator.resetPassword,
+      page: () => const ResetPasswordPage(),
     ),
   ];
 }
