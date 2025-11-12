@@ -6,8 +6,6 @@ class UserModel {
   final String? phone;
   final String? image;
   final String? email;
-  final bool? isAdmin;
-  final String? status;
   final String? note;
 
   UserModel({
@@ -16,8 +14,6 @@ class UserModel {
     this.phone,
     this.image,
     this.email,
-    this.isAdmin,
-    this.status,
     this.note,
   });
 
@@ -27,8 +23,6 @@ class UserModel {
     String? phone,
     String? image,
     String? email,
-    bool? isAdmin,
-    String? status,
     String? note,
   }) {
     return UserModel(
@@ -37,8 +31,6 @@ class UserModel {
       phone: phone ?? this.phone,
       image: image ?? this.image,
       email: email ?? this.email,
-      isAdmin: isAdmin ?? this.isAdmin,
-      status: status ?? this.status,
       note: note ?? this.note,
     );
   }
@@ -51,8 +43,6 @@ class UserModel {
       phone: map['phone'],
       image: map['image'],
       email: map['email'],
-      isAdmin: map['is-admin'],
-      status: map['status'],
       note: map['note'],
     );
   }
@@ -63,8 +53,6 @@ class UserModel {
       'phone': phone,
       'image': image,
       'email': email,
-      'is-admin': false,
-      'status': UserStatus.active.key,
       'note': note,
     };
   }
@@ -74,8 +62,6 @@ class UserModel {
       'name': name,
       'phone': phone,
       'image': image,
-      'is-admin': isAdmin,
-      'status': status,
       'note': note,
     };
   }
