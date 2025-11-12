@@ -100,7 +100,7 @@ class AuthController extends GetxController {
 
       if (result.isSuccess) {
         await _handleLogin();
-        Get.offAllNamed(RouteGenerator.dashboard);
+        Get.offAllNamed(RouteGenerator.transactions);
         SnackBarService.showSnackBar(
           message: Message.loginSuccess,
           bgColor: successColor,

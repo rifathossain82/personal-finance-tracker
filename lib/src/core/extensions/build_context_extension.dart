@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:personal_finance_tracker/src/core/utils/color.dart';
 
 extension BuildContextExtension on BuildContext {
   void unFocusKeyboard() {
@@ -37,4 +38,6 @@ extension BuildContextExtension on BuildContext {
   bool get isDrawerOpen => Scaffold.of(this).isDrawerOpen;
 
   bool get isEndDrawerOpen => Scaffold.of(this).isEndDrawerOpen;
+
+  TextTheme get appTextTheme => Theme.of(this).textTheme;
 }

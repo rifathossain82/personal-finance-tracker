@@ -46,7 +46,6 @@ export 'package:personal_finance_tracker/src/core/widgets/row_icon_text_widget.d
 export 'package:personal_finance_tracker/src/core/widgets/bottom_loader.dart';
 export 'package:personal_finance_tracker/src/core/widgets/k_drop_down_search_builder_with_title.dart';
 export 'package:personal_finance_tracker/src/core/widgets/custom_back_button.dart';
-export 'package:personal_finance_tracker/src/core/widgets/extended_floating_action_button.dart';
 export 'package:personal_finance_tracker/src/core/widgets/appbar_action_button.dart';
 export 'package:personal_finance_tracker/src/core/widgets/gradient_app_bar.dart';
 export 'package:personal_finance_tracker/src/core/widgets/action_text.dart';
@@ -56,4 +55,9 @@ export 'package:personal_finance_tracker/src/core/widgets/custom_tab_bar_widget.
 export 'package:personal_finance_tracker/src/core/widgets/details_info_item_widget.dart';
 export 'package:personal_finance_tracker/src/core/widgets/custom_refresh_indicator.dart';
 export 'package:personal_finance_tracker/src/core/widgets/extended_image_builder.dart';
+export 'package:personal_finance_tracker/src/core/widgets/k_divider.dart';
+export 'package:personal_finance_tracker/src/core/widgets/title_text_widget.dart';
+export 'package:personal_finance_tracker/src/core/widgets/k_payment_method_field_builder_with_title.dart';
+export 'package:personal_finance_tracker/src/core/widgets/k_icon_button.dart';
+export 'package:personal_finance_tracker/src/core/widgets/selectable_container.dart';
 export 'package:personal_finance_tracker/src/core/shared/models/result.dart';

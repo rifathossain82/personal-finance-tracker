@@ -9,8 +9,6 @@ class UserController extends GetxController {
   var isUserUpdating = false.obs;
   var isUserListLoading = false.obs;
   var userList = <UserModel>[].obs;
-  var bannedUserList = <UserModel>[].obs;
-  var adminList = <UserModel>[].obs;
 
   var selectedTabIndex = RxInt(0);
   var searchQuery = RxnString();
@@ -37,23 +35,12 @@ class UserController extends GetxController {
     }).toList();
   }
 
-  void _assignAdmins() {
-    adminList.assignAll(userList.where((user) => user.isAdmin ?? false));
-  }
-
-  void _assignBannedUsers() {
-    bannedUserList.assignAll(userList.where((user) => user.status == UserStatus.banned.key));
-  }
-
   Future<void> getUserList() async {
     try {
       isUserListLoading(true);
 
       final responseBody = await _repository.getUserList();
       userList.value = responseBody.map((e) => UserModel.fromJson(e)).toList();
-
-      _assignAdmins();
-      _assignBannedUsers();
 
       Log.debug("Response Body: $responseBody");
     } catch (e, stackTrace) {
