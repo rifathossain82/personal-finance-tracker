@@ -5,6 +5,8 @@ import 'package:personal_finance_tracker/src/features/auth/view/pages/forgot_pas
 import 'package:personal_finance_tracker/src/features/auth/view/pages/login_page.dart';
 import 'package:personal_finance_tracker/src/features/auth/view/pages/register_page.dart';
 import 'package:personal_finance_tracker/src/features/auth/view/pages/reset_password_page.dart';
+import 'package:personal_finance_tracker/src/features/category/view/pages/category_add_update_page.dart';
+import 'package:personal_finance_tracker/src/features/category/view/pages/category_list_page.dart';
 import 'package:personal_finance_tracker/src/features/transaction/view/pages/transaction_add_update_page.dart';
 import 'package:personal_finance_tracker/src/features/transaction/view/pages/transactions_page.dart';
 
@@ -18,6 +20,8 @@ class RouteGenerator {
   static const String transactions = '/transactions';
   static const String transactionAddUpdate = '/transaction-add-update';
   static const String transactionDetails = '/transaction-details';
+  static const String categoryList = '/category-list';
+  static const String categoryAddUpdate = '/category-add-update';
 
   static final routes = [
     GetPage(
@@ -55,6 +59,16 @@ class RouteGenerator {
       name: RouteGenerator.transactionAddUpdate,
       page: () => TransactionAddUpdatePage(
         arguments: Get.arguments as TransactionAddUpdatePageArguments,
+      ),
+    ),
+    GetPage(
+      name: RouteGenerator.categoryList,
+      page: () => const CategoryListPage(),
+    ),
+    GetPage(
+      name: RouteGenerator.categoryAddUpdate,
+      page: () => CategoryAddUpdatePage(
+        existingCategory: Get.arguments,
       ),
     ),
   ];

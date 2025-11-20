@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: AppConstants.appName,
       theme: AppTheme.lightTheme,
-      initialRoute: RouteGenerator.transactions,
+      initialRoute: RouteGenerator.categoryList,
       getPages: RouteGenerator.routes,
       defaultTransition: Transition.fade,
     );
